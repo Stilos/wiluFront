@@ -19,7 +19,7 @@
 <div class="row bookmarks-list">
   <div class="col-xs-12">
     <ul>
-      <app-bookmark-item *ngFor="let bookmark of bookmarksArray"></app-bookmark-item>
+      <app-bookmark-item *ngFor="let bookmark of bookmarksArray" [bookmark]="bookmark"></app-bookmark-item>
     </ul>
   </div>
 </div>

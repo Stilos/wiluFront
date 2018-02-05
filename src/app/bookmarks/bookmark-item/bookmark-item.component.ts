@@ -14,12 +14,13 @@ export class BookmarkItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.bookmark)
     setTimeout(() => {
       this.editForm.setValue({
         name: this.bookmark.name,
         url: this.bookmark.url,
-      })
-    }, 500)
+      });
+    }, 500);
 
   }
 

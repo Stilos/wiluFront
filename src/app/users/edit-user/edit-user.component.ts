@@ -42,7 +42,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
         this.isEditMode = false;
       }
     });
+
       this.bookmarksArray = this.bookmarksService.getBookmarks();
+      //console.log(this.bookmarksArray);
   }
 
   onCancel() {
