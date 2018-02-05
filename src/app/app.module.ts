@@ -12,6 +12,7 @@ import {UsersService} from './users/users.service';
 import {FormsModule} from '@angular/forms';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
 import {promise} from 'selenium-webdriver';
+import { BookmarkItemComponent } from './bookmarks/bookmark-item/bookmark-item.component';
 import fullyResolved = promise.fullyResolved;
 
 const appRoutes: Routes = [
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     BookmarksComponent,
     HomeComponent,
     UserComponent,
-    EditUserComponent
+    EditUserComponent,
+    BookmarkItemComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
