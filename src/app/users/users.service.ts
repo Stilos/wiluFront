@@ -36,4 +36,9 @@ export class UsersService {
     this.usersArray.push(newUser);
     this.usersArrayUpdated.next(this.usersArray.slice());
   }
+
+  public updateUser(user: User) {
+    this.usersArray[this.getUserIndexByUserId(user.id)] = user;
+    this.usersArrayUpdated.next(this.usersArray.slice());
+  }
 }

@@ -44,7 +44,12 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm) {
-    this.usersService.addUser(new User(null, form.value.name, form.value.surname));
+    if (this.isEditMode) {
+      this.usersService.updateUser(new User(this.editedUser.id, form.value.name, form.value.surname));
+    } else {
+      this.usersService.addUser(new User(null, form.value.name, form.value.surname));
+    }
+    this.router.navigate(['./users']);
   }
 
   ngOnDestroy() {
