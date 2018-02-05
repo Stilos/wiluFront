@@ -1,9 +1,11 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {User} from '../user.model';
-import {NgForm} from '@angular/forms';
-import {UsersService} from '../users.service';
-import {Subscription} from 'rxjs/Subscription';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { User } from '../user.model';
+import { NgForm } from '@angular/forms';
+import { UsersService } from '../users.service';
+import { Subscription } from 'rxjs/Subscription';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Bookmark } from '../../bookmarks/bookmark.model';
+import { BookmarksService } from '../../bookmarks/bookmarks.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -14,10 +16,14 @@ export class EditUserComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   editedUser: User;
   isEditMode: boolean;
+  bookmarksArray: Bookmark[];
 
   @ViewChild('f') editForm: NgForm;
 
-  constructor(private usersService: UsersService, private route: ActivatedRoute, private router: Router) {
+  constructor(private usersService: UsersService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private bookmarksService: BookmarksService) {
   }
 
   ngOnInit() {
@@ -36,6 +42,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
         this.isEditMode = false;
       }
     });
+      this.bookmarksArray = this.bookmarksService.getBookmarks();
   }
 
   onCancel() {

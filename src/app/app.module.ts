@@ -14,6 +14,7 @@ import { EditUserComponent } from './users/edit-user/edit-user.component';
 import {promise} from 'selenium-webdriver';
 import { BookmarkItemComponent } from './bookmarks/bookmark-item/bookmark-item.component';
 import fullyResolved = promise.fullyResolved;
+import { BookmarksService } from './bookmarks/bookmarks.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -39,7 +40,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule
   ],
-  providers: [UsersService],
+  providers: [UsersService, BookmarksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

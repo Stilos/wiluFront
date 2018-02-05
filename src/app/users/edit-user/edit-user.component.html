@@ -17,5 +17,7 @@
 <hr>
 <h3 class="text-center">User Bookmarks</h3>
 <div class="col-xs-10 col-xs-offset-1">
-  <app-bookmark-item *ngFor="let a of [1,2,3,4,5]"></app-bookmark-item>
+  <ul>
+    <app-bookmark-item *ngFor="let bookmark of bookmarksArray"></app-bookmark-item>
+  </ul>  
 </div>
