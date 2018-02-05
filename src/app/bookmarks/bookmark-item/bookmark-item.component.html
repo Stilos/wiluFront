@@ -1,23 +1,25 @@
 <li class="list-group-item">
-  <div class="row">
-    <div class="col-xs-4">
-      <label for="input1">Name</label>
-      <input type="text" id="input1" name="input1" class="form-control left" ngModel>
+  <form #f="ngForm">
+    <div class="row">
+      <div class="col-xs-4">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" class="form-control left" ngModel>
+      </div>
+      <div class="col-xs-8">
+        <label for="url">URL</label>
+        <input type="text" id="url" name="url" class="form-control" ngModel>
+      </div>
     </div>
-    <div class="col-xs-8">
-      <label for="input2">URL</label>
-      <input type="text" id="input2" name="input2" class="form-control" ngModel>
+    <div class="row">
+      <div class="col-xs-12">
+        <br>
+        <button class="btn btn-warning pull-right">
+          <span class="glyphicon glyphicon-edit"></span>
+        </button>
+        <button class="btn btn-danger pull-right">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <br>
-      <button class="btn btn-warning pull-right">
-        <span class="glyphicon glyphicon-edit"></span>
-      </button>
-      <button class="btn btn-danger pull-right">
-        <span class="glyphicon glyphicon-trash"></span>
-      </button>
-    </div>
-  </div>
+  </form>
 </li>

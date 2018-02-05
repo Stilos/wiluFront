@@ -1,7 +1,10 @@
-li button {
-  padding: 0px 8px;
-  margin-left: 5px;
+li{
+  line-height: 30px;
 }
+
+li button {
+  margin-left: 5px;
+} 
 li a {
   cursor: pointer;
 }
