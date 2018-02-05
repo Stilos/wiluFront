@@ -1,0 +1,11 @@
+li button {
+  padding: 0px 8px;
+  margin-left: 5px;
+}
+li a {
+  cursor: pointer;
+}
+li:hover{
+  cursor: pointer;
+  background-color: aliceblue;
+}

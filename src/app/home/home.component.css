@@ -1,0 +1,17 @@
+a:hover {
+  text-decoration: none;
+}
+
+a:hover h3{
+  text-decoration: underline;
+}
+
+h3 {
+  margin-top: 0;
+  margin-left: 15px;
+}
+
+.thumbnail {
+  width: 200px;
+
+}

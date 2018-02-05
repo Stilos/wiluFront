@@ -1,0 +1,7 @@
+<a (click)="onUserSelect()">
+  <li class="list-group-item">
+    #{{user.id}} {{user.name + '' + user.surname}}
+    <button type="button" class="btn btn-warning pull-right clearfix" (click)="onUserEdit()"><span class="glyphicon glyphicon-pencil"></span></button>
+    <button type="button" class="btn btn-danger pull-right clearfix" (click)="onUserDelete()"><span class="glyphicon glyphicon-trash"></span></button>
+  </li>
+</a>
