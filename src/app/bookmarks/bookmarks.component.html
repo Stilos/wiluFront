@@ -6,6 +6,9 @@
       <div class="row">
         <button class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span>Add Bookmark</button>
       </div>
+      <div class="row">
+        <app-bookmark-item *ngFor="let bookmark of bookmarksArray" [bookmark]="bookmark"></app-bookmark-item>
+      </div>
     </div>
   </div>
 </div>

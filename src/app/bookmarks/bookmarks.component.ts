@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { Bookmark } from './bookmark.model';
+import { BookmarksService } from './bookmarks.service';
 
 @Component({
   selector: 'app-bookmarks',
@@ -6,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bookmarks.component.css']
 })
 export class BookmarksComponent implements OnInit {
+  bookmarksArray: Bookmark[];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private bookmarksService: BookmarksService) {
   }
 
+
+  ngOnInit() {
+    this.bookmarksArray = this.bookmarksService.getBookmarks();
+  }
 }
