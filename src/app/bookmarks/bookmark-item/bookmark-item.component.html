@@ -1,13 +1,13 @@
 <li class="list-group-item">
-  <form #f="ngForm">
+  <form #f="ngForm" (ngSubmit)="onSave(f)">
     <div class="row">
       <div class="col-xs-4">
         <label for="name">Name</label>
-        <input type="text" id="name" name="name" class="form-control left" ngModel>
+        <input type="text" id="name" name="name" class="form-control left" [disabled]="!isEditMode" ngModel>
       </div>
       <div class="col-xs-7">
         <label for="url">URL</label>
-        <input type="text" id="url" name="url" class="form-control" ngModel>
+        <input type="text" id="url" name="url" class="form-control" [disabled]="!isEditMode" ngModel>
       </div>
       <div class="col-xs-1" *ngIf="isInBookmarks">
         <div class="row">
@@ -25,14 +25,17 @@
     <div class="row">
       <div class="col-xs-12">
         <br>
-        <button class="btn btn-warning pull-right">
+        <button type="button" class="btn btn-warning pull-right" (click)="onEdit()">
           <span class="glyphicon glyphicon-edit"></span>
+          A
         </button>
-        <button class="btn btn-danger pull-right">
+        <button *ngIf="isEditMode" type="button" class="btn btn-danger pull-right" (click)="onDelete()">
           <span class="glyphicon glyphicon-trash"></span>
+          B
         </button>
-        <button class="btn btn-success pull-right">
+        <button *ngIf="isEditMode" type="submit" class="btn btn-success pull-right">
           <span class="glyphicon glyphicon-floppy-disk"></span>
+          C
         </button>
       </div>
     </div>

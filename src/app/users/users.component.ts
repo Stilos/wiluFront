@@ -17,9 +17,12 @@ export class UsersComponent implements OnInit, OnDestroy {
   constructor(private usersService: UsersService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.usersArray = this.usersService.getUsers();
-    this.subscription = this.usersService.usersArrayUpdated.subscribe((users: User[]) => {
+    this.usersService.getUsers().subscribe((users: User[]) => {
+      console.log(users);
       this.usersArray = users;
+    });
+      this.subscription = this.usersService.usersArrayUpdated.subscribe((users: User[]) => {
+        this.usersArray = users;
     });
   }
 

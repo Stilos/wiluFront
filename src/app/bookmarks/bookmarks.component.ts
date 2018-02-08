@@ -16,6 +16,8 @@ export class BookmarksComponent implements OnInit {
 
 
   ngOnInit() {
-    this.bookmarksArray = this.bookmarksService.getBookmarks();
+    this.bookmarksService.getBookmarks().subscribe((bookmarks: Bookmark[]) => {
+      this.bookmarksArray = bookmarks;
+    });
   }
 }

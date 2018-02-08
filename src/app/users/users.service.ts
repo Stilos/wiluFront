@@ -1,44 +1,44 @@
 import {User} from './user.model';
 import {Subject} from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class UsersService {
   usersArrayUpdated = new Subject<User[]>();
   isEditMode = new Subject<{user: User, isEdit: boolean}>();
 
-  private usersArray: User[] = [
-    new User(1, 'Some', 'One'),
-    new User(2, 'Some2', 'One2'),
-    new User(3, 'Some3', 'One3'),
-  ];
+  constructor(private http: HttpClient) {}
 
-  private getUserIndexByUserId(userId: number) {
-    return this.usersArray.indexOf(this.usersArray.find(user => user.id === userId));
+  public getUsers():Observable<User[]> {
+    return this.http.get<User[]>('http://localhost:8080/api/users', {observe:'body', responseType:'json'});
   }
 
-  public getUsers(): User[] {
-    return this.usersArray.slice();
-  }
-
-  public getUser(id: number): User {
-    return this.usersArray.slice()[this.getUserIndexByUserId(id)];
+  public getUser(id: number): Observable<User> {
+    return this.http.get<User>('http://localhost:8080/api/users/' + id, {observe:'body', responseType:'json'});
   }
 
   public removeUser(id) {
-    this.usersArray.splice(this.getUserIndexByUserId(id), 1);
-    this.usersArrayUpdated.next(this.usersArray.slice());
+    this.http.delete('http://localhost:8080/api/users/delete/' + id).subscribe(
+      () => {
+      this.getUsers().subscribe((users: User[]) => {
+        this.usersArrayUpdated.next(users);
+      })
+    });
+    
   }
 
   public addUser(user: User) {
-    // TODO: Get rid of id increment
-    const newUser: User = user;
-    newUser.id = this.usersArray.length + 1;
-
-    this.usersArray.push(newUser);
-    this.usersArrayUpdated.next(this.usersArray.slice());
+   this.updateUser(user)
   }
 
   public updateUser(user: User) {
-    this.usersArray[this.getUserIndexByUserId(user.id)] = user;
-    this.usersArrayUpdated.next(this.usersArray.slice());
+    return this.http.post<User>('http://localhost:8080/api/users/register', user).subscribe(() => {
+      this.getUsers().subscribe((users: User[]) => {
+        this.usersArrayUpdated.next(users);
+      })
+    });
+    
   }
 }

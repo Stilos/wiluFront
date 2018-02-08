@@ -14,9 +14,11 @@ import { BookmarksService } from '../../bookmarks/bookmarks.service';
 })
 export class EditUserComponent implements OnInit, OnDestroy {
   subscription: Subscription;
-  editedUser: User;
+  editedUser: User = new User(0,'','');
   isEditMode: boolean;
+  isNewUser: boolean = false;
   bookmarksArray: Bookmark[];
+  bookmarksLoaded = false;
 
   @ViewChild('f') editForm: NgForm;
 
@@ -30,8 +32,10 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.subscription = this.route.params.subscribe((params) => {
       if (params['id']) {
         this.isEditMode = true;
-        this.editedUser = this.usersService.getUser(+ params['id']);
-        console.log(this.editedUser)
+        this.usersService.getUser(+ params['id']).subscribe((user) => {
+          this.editedUser = user;
+          this.getBookmarksByUserId(this.editedUser.id);
+        })
         setTimeout(() => {
           this.editForm.setValue({
             'name': this.editedUser.name,
@@ -40,11 +44,13 @@ export class EditUserComponent implements OnInit, OnDestroy {
         }, 500);
       } else {
         this.isEditMode = false;
+        this.isNewUser = true;
       }
     });
 
-      this.bookmarksArray = this.bookmarksService.getBookmarks();
-      //console.log(this.bookmarksArray);
+    this.bookmarksService.bookmarksArrayUpdated.subscribe((bookmarks: Bookmark[]) => {
+      this.bookmarksArray = bookmarks;
+    })
   }
 
   onCancel() {
@@ -63,5 +69,12 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  getBookmarksByUserId(userId) {
+    this.bookmarksService.getUserBookmarks(userId).subscribe((bookmarks: Bookmark[]) => {
+      this.bookmarksArray = bookmarks;
+      this.bookmarksLoaded = true;
+    });
   }
 }
